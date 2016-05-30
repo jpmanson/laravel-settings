@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class EloquentStorage extends Eloquent implements SettingStorageInterface
 {
-    protected $fillable = ['key', 'value', 'locale'];
+    protected $fillable = ['key', 'value', 'locale', 'type'];
 
     protected $table = 'settings';
 
@@ -25,9 +25,9 @@ class EloquentStorage extends Eloquent implements SettingStorageInterface
         return $setting->first();
     }
 
-    public static function store($key, $value, $lang)
+    public static function store($key, $value, $lang, $type)
     {
-        $setting = ['key' => $key, 'value' => $value];
+        $setting = ['key' => $key, 'value' => $value, 'type' => $type];
 
         if (!is_null($lang)) {
             $setting['locale'] = $lang;
@@ -36,7 +36,7 @@ class EloquentStorage extends Eloquent implements SettingStorageInterface
         static::create($setting);
     }
 
-    public static function modify($key, $value, $lang)
+    public static function modify($key, $value, $lang, $type)
     {
         if (!is_null($lang)) {
             $setting = static::where('locale', $lang);
@@ -44,7 +44,7 @@ class EloquentStorage extends Eloquent implements SettingStorageInterface
             $setting = new static();
         }
 
-        $setting->where('key', $key)->update(['value' => $value]);
+        $setting->where('key', $key)->update(['value' => $value, 'type' => $type]);
     }
 
     public static function forget($key, $lang)
