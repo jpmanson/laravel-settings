@@ -61,6 +61,11 @@
 
 	Setting::lang('zh-TW')->forget('name');
 	// delete the setting by key and language
+	
+	Setting::get('name', 'Computer', true);
+	// get setting value with key 'name'
+	// return 'Computer' if the key does not exists and save the key in database
+	// third parameter = true force to save the key with the provided default value if not exists
 ```
 
 ## Dealing with array
