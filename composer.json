@@ -1,5 +1,5 @@
 {
-  "name": "unisharp/laravel-settings",
+  "name": "jpmanson/laravel-settings",
   "description": "Persistent settings manager for laravel, translations are supported.",
   "type": "library",
   "keywords": [
