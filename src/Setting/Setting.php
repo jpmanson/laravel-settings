@@ -21,7 +21,7 @@ class Setting
      * @param  string  $value
      * @return string|null
      */
-    public function get($key, $default_value = null)
+    public function get($key, $default_value = null, $saveIfNotExists = false)
     {
         if (strpos($key, '.') !== false) {
             $setting = static::getSubValue($key);
@@ -30,6 +30,7 @@ class Setting
                 $setting = static::getByKey($key);
             } else {
                 $setting = $default_value;
+                if ($saveIfNotExists) static::setByKey($key, $default_value);
             }
         }
         $this->lang = null;
@@ -149,9 +150,9 @@ class Setting
         $main_key = explode('.', $key)[0];
         
         if (static::hasByKey($main_key)) {
-            Storage::modify($main_key, $value, $this->lang);
+            Storage::modify($main_key, $value, $this->lang, gettype($value));
         } else {
-            Storage::store($main_key, $value, $this->lang);
+            Storage::store($main_key, $value, $this->lang, gettype($value));
         }
 
         if (Cache::has($main_key.'@'.$this->lang)) {
