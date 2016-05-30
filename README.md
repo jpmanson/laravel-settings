@@ -9,7 +9,7 @@
 1. install package
 
 	```php
-		composer require unisharp/laravel-settings
+		composer require jpmanson/laravel-settings
 	```
 
 1. edit config/app.php
