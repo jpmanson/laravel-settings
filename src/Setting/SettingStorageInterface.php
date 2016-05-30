@@ -20,7 +20,7 @@ interface SettingStorageInterface
      * @param  mixed   $value
      * @return void
      */
-    public static function store($key, $value, $lang);
+    public static function store($key, $value, $lang, $type);
 
     /**
      * Check if the setting exists.
@@ -28,7 +28,7 @@ interface SettingStorageInterface
      * @param  string  $key
      * @return boolean
      */
-    public static function modify($key, $value, $lang);
+    public static function modify($key, $value, $lang, $type);
 
     /**
      * Delete a setting.
