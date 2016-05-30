@@ -16,6 +16,7 @@ class CreateSettingsTable extends Migration
             $table->string('key');
             $table->string('value')->nullable();
             $table->string('locale')->nullable();
+            $table->string('type')->nullable();
         });
     }
 
