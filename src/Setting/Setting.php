@@ -150,9 +150,9 @@ class Setting
         $main_key = explode('.', $key)[0];
         
         if (static::hasByKey($main_key)) {
-            Storage::modify($main_key, $value, $this->lang, gettype($value));
+            Storage::modify($main_key, $value, $this->lang, (is_object($value)?get_class($value):gettype($value)) );
         } else {
-            Storage::store($main_key, $value, $this->lang, gettype($value));
+            Storage::store($main_key, $value, $this->lang, (is_object($value)?get_class($value):gettype($value)));
         }
 
         if (Cache::has($main_key.'@'.$this->lang)) {
